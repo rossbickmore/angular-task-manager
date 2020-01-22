@@ -1,13 +1,14 @@
-<section class="todoapp">
-  <app-todo-list-header
-    (add)="onAddTodo($event)"
-  ></app-todo-list-header>
-  <app-todo-list
-    [todos]="todos"
-    (toggleComplete)="onToggleTodoComplete($event)"
-    (remove)="onRemoveTodo($event)"
-  ></app-todo-list>
-  <app-todo-list-footer
-    [todos]="todos"
-  ></app-todo-list-footer>
-</section>
+<h1>My ToDo list</h1>
+<div>
+  <label for="todo">Add to your to do list</label>
+  <input type="text" name="todo" (keydown.enter)="onAddTodo($event)">
+</div>
+<ul>
+  <div class="todo-list" *ngFor="let todo of todos">
+    <li >
+      <p>{{todo.id}} {{todo.title}} {{todo.complete}}</p>
+      <button (click)="onUpdateTodo(todo)">Market as complete</button>
+      <button (click)="onDeleteTodo(todo)">Delete</button>
+    </li>
+  </div>
+</ul>

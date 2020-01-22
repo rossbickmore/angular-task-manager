@@ -6,9 +6,11 @@ body {
 
 button {
 	margin: 0;
-	padding: 0;
-	border: 0;
-	background: none;
+	padding: 0.2rem;
+	border: 2rem;
+	border-radius: 0.1rem;
+	background-color: rgb(250, 165, 165);
+	cursor: pointer;
 	font-size: 100%;
 	vertical-align: baseline;
 	font-family: inherit;
@@ -145,8 +147,8 @@ label[for='toggle-all'] {
 
 .todo-list li {
 	position: relative;
-	font-size: 24px;
-	border-bottom: 1px solid #ededed;
+	font-size: 12px;
+	border-bottom: 1px solid #858282;
 }
 
 .todo-list li:last-child {

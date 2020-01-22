@@ -11,49 +11,40 @@ import { Todo } from './todo';
 export class AppComponent implements OnInit {
 
   todos: Todo[] = [];
-
   constructor(
     private todoDataService: TodoDataService
   ) {
-  }
+  } 
 
   public ngOnInit() {
-    this.todoDataService
-      .getAllTodos()
-      .subscribe(
-        (todos) => {
-          this.todos = todos;
-        }
-      );
+    this.todoDataService.getAllTodos().subscribe( (todos) => this.todos = todos  )
   }
 
-  onAddTodo(todo) {
-    this.todoDataService
-      .addTodo(todo)
-      .subscribe(
-        (newTodo) => {
-          this.todos = this.todos.concat(newTodo);
-        }
-      );
+  public onAddTodo(event) {
+    const newTodo = new Todo({
+      id: this.todos[this.todos.length - 1].id + 1,
+      title: event.target.value,
+      complete: false
+    })
+    event.target.value = ""
+    this.todoDataService.addTodo(newTodo).subscribe( todo => this.todos.push(todo))
   }
 
-  onToggleTodoComplete(todo) {
-    this.todoDataService
-      .toggleTodoComplete(todo)
-      .subscribe(
-        (updatedTodo) => {
-          todo = updatedTodo;
-        }
-      );
+  public onUpdateTodo(todo: Todo) {
+    const updatedToDo = new Todo({...todo, complete: true})
+    const id = todo.id
+    return this.todoDataService.updateTodo(updatedToDo).subscribe( 
+      todo => {
+        this.todos = this.todos.map( todo => id === todo.id ? updatedToDo : todo)
+      })
   }
 
-  onRemoveTodo(todo) {
-    this.todoDataService
-      .deleteTodoById(todo.id)
-      .subscribe(
-        (_) => {
-          this.todos = this.todos.filter((t) => t.id !== todo.id);
-        }
-      );
+  public onDeleteTodo(todo: Todo) {
+    const id = todo.id
+    return this.todoDataService.deleteTodo(id).subscribe(
+      todo => {
+        this.todos = this.todos.filter( todo => id !== todo.id)
+      }
+    )
   }
 }
