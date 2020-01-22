@@ -1,0 +1,5 @@
+<div>
+  <label for="todo">Add to your to do list</label>
+  <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title"
+         (keyup.enter)="addTodo()">
+</div>

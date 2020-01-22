@@ -1,14 +1,11 @@
 <h1>My ToDo list</h1>
-<div>
-  <label for="todo">Add to your to do list</label>
-  <input type="text" name="todo" (keydown.enter)="onAddTodo($event)">
-</div>
-<ul>
-  <div class="todo-list" *ngFor="let todo of todos">
-    <li >
-      <p>{{todo.id}} {{todo.title}} {{todo.complete}}</p>
-      <button (click)="onUpdateTodo(todo)">Market as complete</button>
-      <button (click)="onDeleteTodo(todo)">Delete</button>
-    </li>
-  </div>
-</ul>
+<app-todo-form
+  (add)="onAddTodo($event)"
+>
+</app-todo-form>
+<app-todo-list
+  [todos]="todos"
+  (update)="onUpdateTodo($event)"
+  (delete)="onDeleteTodo($event)"
+>
+</app-todo-list>

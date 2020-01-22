@@ -1,0 +1,9 @@
+<ul>
+  <div class="todo-list" *ngFor="let todo of todos">
+    <li >
+      <p>{{todo.id}} {{todo.title}} {{todo.complete}}</p>
+      <button (click)="onUpdateTodo(todo)">Market as complete</button>
+      <button (click)="onDeleteTodo(todo)">Delete</button>
+    </li>
+  </div>
+</ul>

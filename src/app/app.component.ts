@@ -20,17 +20,12 @@ export class AppComponent implements OnInit {
     this.todoDataService.getAllTodos().subscribe( (todos) => this.todos = todos  )
   }
 
-  public onAddTodo(event) {
-    const newTodo = new Todo({
-      id: this.todos[this.todos.length - 1].id + 1,
-      title: event.target.value,
-      complete: false
-    })
-    event.target.value = ""
-    this.todoDataService.addTodo(newTodo).subscribe( todo => this.todos.push(todo))
+  public onAddTodo(todo: Todo) {
+    this.todoDataService.addTodo(todo).subscribe( todo => this.todos.push(todo))
   }
 
   public onUpdateTodo(todo: Todo) {
+    console.log(todo)
     const updatedToDo = new Todo({...todo, complete: true})
     const id = todo.id
     return this.todoDataService.updateTodo(updatedToDo).subscribe( 
